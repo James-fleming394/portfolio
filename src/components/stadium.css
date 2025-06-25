@@ -70,6 +70,7 @@
   font-weight: bold;
   font-family: 'Comic Sans MS', cursive;
   border-radius: 6px;
+  color: red;
   white-space: nowrap;
   z-index: 5;
   opacity: 0;
