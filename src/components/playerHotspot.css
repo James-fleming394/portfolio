@@ -4,3 +4,23 @@
   z-index: 10;
 }
 
+.player-hotspot:hover .player-img {
+  filter: drop-shadow(0 0 10px gold);
+  transform: scale(1.05);
+}
+
+.title-card {
+  position: absolute;
+  bottom: 100%; 
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  padding: 6px 12px;
+  background-color: #fff9c4;
+  border: 2px solid #000;
+  font-weight: bold;
+  font-family: 'Comic Sans MS', cursive;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 9999;
+}

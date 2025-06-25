@@ -26,6 +26,7 @@
   transform: translate(-50%, -50%);
   pointer-events: auto;
   cursor: pointer;
+  border: #000 2px solid;
 }
 
 .player-zone {
@@ -33,8 +34,15 @@
   height: auto;
   display: block;
   transition: transform 0.2s ease, filter 0.2s ease;
+  z-index: 2;
 }
 
+/* Remove the outline while keeping layout */
+.hidden-outline {
+  visibility: hidden;
+}
+
+/* Hover effect using container */
 .player-container:hover .player-zone {
   filter: drop-shadow(0 0 10px gold);
   transform: scale(1.05);
@@ -42,20 +50,19 @@
 
 .title-card {
   position: absolute;
-  bottom: 80%;
+  top: -40px;
   left: 50%;
   transform: translateX(-50%);
+  padding: 5px 10px;
   background-color: #fff9c4;
   border: 2px solid #000;
-  color: red;
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-family: 'Comic Sans MS', cursive;
   font-weight: bold;
+  font-family: 'Comic Sans MS', cursive;
+  border-radius: 6px;
   white-space: nowrap;
+  z-index: 5;
   opacity: 0;
   transition: opacity 0.2s ease;
-  z-index: 999;
 }
 
 .player-container:hover .title-card {
