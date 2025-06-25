@@ -1,0 +1,33 @@
+.player-hotspot {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.player-dot {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border: 3px solid red;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+.player-hotspot:hover .player-dot {
+    transform: scale(1.2);
+}
+
+.title-card {
+    position: absolute;
+    top: -40px;
+    left: -20px;
+    padding: 5px 10px;
+    background-color: #fff9c4;
+    border: 2px solid #000;
+    font-weight: bold;
+    font-family: 'Comic Sans MS', cursive;
+    border-radius: 6px;
+    white-space: nowrap;
+}
