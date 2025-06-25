@@ -23,7 +23,7 @@ export default function App() {
 
         <section id="contact" className="section">
             <h2>Contact</h2>
-            <p>Email: jamesfleming.dev@gmail.com</p>
+            <p>Email: james.fleming394@gmail.com</p>
         </section>
     </>
     );
