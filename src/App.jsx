@@ -1,10 +1,14 @@
 import React from 'react';
 import Navbar from './components/Navbar';
+import Stadium from './components/Stadium';
 
 export default function App() {
     return (
     <>
         <Navbar />
+        <Stadium>
+
+        </Stadium>
 
         <section id="home" className="section">
             <h1>James Fleming</h1>
