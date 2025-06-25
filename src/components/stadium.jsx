@@ -12,6 +12,7 @@ export default function Stadium() {
             <img
                 src="/player-zones/pitcher.png"
                 alt="Pitcher"
+            
                 className="player-zone"
                 style={{
                     position: 'absolute',
@@ -160,7 +161,6 @@ export default function Stadium() {
                 }}
                 onClick={() => alert('Resume clicked: Resume')}
             />
-            <PlayerHotspot top="82%" left="41.5%" label="LinkedIn" onClick={() => alert('LinkedIn')} />
         </div>
     </div>
     );
