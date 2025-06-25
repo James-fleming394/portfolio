@@ -24,3 +24,9 @@
 .player-hotspot {
     pointer-events: auto;
 }
+
+.player-zone:hover {
+    filter: drop-shadow(0 0 10px gold);
+    transform: translate(-50%, -50%) scale(1.05);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
