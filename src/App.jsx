@@ -6,7 +6,7 @@ export default function App() {
     <>
         <Navbar />
 
-        <section id="intro" className="section">
+        <section id="home" className="section">
             <h1>James Fleming</h1>
             <p>Software Engineer</p>
         </section>
