@@ -26,19 +26,32 @@
   transform: translate(-50%, -50%);
   pointer-events: auto;
   cursor: pointer;
-  width: auto;
-  height: auto;
-  z-index: 2;
+  z-index: 5;
 }
 
-/* Invisible but layout-preserving image */
-.player-zone {
-  width: 100%;
-  height: 100%;
-  visibility: hidden;
+/* Title Card */
+.title-card {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background-color: #fff9c4;
+  border: 2px solid #000;
+  font-weight: bold;
+  font-family: 'Comic Sans MS', cursive;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* Glow pulse on hover using pseudo-element */
+.player-container:hover .title-card {
+  opacity: 1;
+}
+
+/* Glowing pulse */
 .player-container::before {
   content: '';
   position: absolute;
@@ -58,26 +71,25 @@
   opacity: 1;
 }
 
-/* Title card */
-.title-card {
-  position: absolute;
-  top: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 5px 10px;
-  background-color: #fff9c4;
-  border: 2px solid #000;
-  font-weight: bold;
-  font-family: 'Comic Sans MS', cursive;
-  border-radius: 6px;
-  color: red;
-  white-space: nowrap;
-  z-index: 5;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+/* Baseball animation image */
+.baseball-direct {
+  position: fixed;
+  top: 66%;
+  left: 48.5%;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  display: none;
+  z-index: 999;
 }
 
-.player-container:hover .title-card {
-  opacity: 1;
-  transition: opacity 0.5s ease;
+.baseball-anim {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1);
+  transition: none;
 }
