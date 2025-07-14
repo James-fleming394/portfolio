@@ -3,83 +3,104 @@ import './Stadium.css';
 import Modal from './Modal';
 
 export default function Stadium() {
-    const [modalContent, setModalContent] = useState(null);
-    const baseballRef = useRef(null);
+  const [modalContent, setModalContent] = useState(null);
+  const [showRipple, setShowRipple] = useState(false);
+  const baseballRef = useRef(null);
 
 const handleClick = (content) => {
-    const ball = baseballRef.current;
-    if (!ball) return;
+  const ball = baseballRef.current;
+  if (!ball) return;
 
-        ball.style.display = 'block';
-        ball.style.opacity = '1';
-        ball.src = '/baseball.png';
-        ball.style.transition = 'none';
-        ball.style.transform = 'translate(-50%, -50%) scale(1)';
-        ball.style.top = '66%';
-        ball.style.left = '48.5%';
+  // Set to pitcher
+  ball.style.display = 'block';
+  ball.style.opacity = '1';
+  ball.style.transform = 'translate(-50%, -50%) scale(1)';
+  ball.style.top = '66%';
+  ball.style.left = '48.5%';
+  ball.src = '/baseball.png';
+  ball.style.transition = 'all 0.6s ease-in';
 
-    // Pitch to batter
+  // Pitch to hitter
+  setTimeout(() => {
+    ball.style.top = '72%';
+    ball.style.left = '12.8%';
+  }, 50);
+
+  // Hit toward screen center
+setTimeout(() => {
+  ball.src = '/baseball-fire.png';
+
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+
+  const ballSize = ball.offsetWidth;
+
+  // Convert centerX/centerY from pixels to percentages relative to viewport
+  const topPercent = (centerY / window.innerHeight) * 100;
+  const leftPercent = (centerX / window.innerWidth) * 100;
+
+  ball.style.transition = 'all 0.8s ease-out';
+  ball.style.top = `${topPercent}%`;
+  ball.style.left = `${leftPercent}%`;
+
+  // FIX: Use scale transform *after* translate to keep it centered
+  ball.style.transform = 'translate(-50%, -50%) scale(8)';
+}, 700);
+
+  // Ripple + modal
+  setTimeout(() => {
+    setShowRipple(true);
+    ball.style.opacity = '0';
+
     setTimeout(() => {
-        ball.style.transition = 'top 0.4s ease-in, left 0.4s ease-in';
-        ball.style.top = '72%';
-        ball.style.left = '12.8%';
-    }, 50);
+      setModalContent(content);
+      ball.style.display = 'none';
+      setShowRipple(false);
+    }, 400);
+  }, 1500);
+};
 
-    // Hit to center
-    setTimeout(() => {
-        ball.src = '/baseball-fire.png';
-        const wrapper = document.querySelector('.stadium-wrapper');
-        const rect = wrapper.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
+  const closeModal = () => {
+    setModalContent(null);
+  };
 
+  return (
+    <div className="stadium-wrapper">
+      <img src="/stadium.png" alt="Stadium" className="stadium-img" />
 
-        ball.style.transition = 'all 0.9s ease-in-out';
-        ball.style.top = `${centerY}px`;
-        ball.style.left = `${centerX}px`;
-        ball.style.transform = 'translate(-50%, -50%) scale(50)';
-        ball.style.opacity = '0';
-    }, 550);
+      <div className="hotspot-overlay">
+        {[
+          ['Name & Title', '66%', '48.5%', '8%', '12.5%'],
+          ['Contact', '76.5%', '4.5%', '8%', '12%'],
+          ['About Me', '72%', '12.8%', '8%', '12.5%'],
+          ['Project 1', '79%', '72%', '9%', '14.5%'],
+          ['Project 2', '59.7%', '74.5%', '9%', '14%'],
+          ['Project 3', '56.4%', '56%', '8%', '12%'],
+          ['GitHub', '46%', '70%', '8%', '10%'],
+          ['LinkedIn', '57.5%', '33%', '8%', '12%'],
+          ['Resume', '86%', '43.3%', '8%', '16%'],
+        ].map(([label, top, left, width, height]) => (
+          <div
+            key={label}
+            className="player-container"
+            style={{ top, left, width, height }}
+            onClick={() => handleClick(label)}
+          >
+            <div className="title-card">{label}</div>
+          </div>
+        ))}
+      </div>
 
-    // Show modal
-    setTimeout(() => {
-        setModalContent(content);
-        ball.style.display = 'none';
-        }, 1350);
-    };
+      <img
+        ref={baseballRef}
+        src="/baseball.png"
+        alt="Baseball"
+        className="baseball-anim"
+        style={{ display: 'none' }}
+      />
 
-    const closeModal = () => {
-        setModalContent(null);
-    };
-
-    return (
-        <div className="stadium-wrapper">
-        <img src="/stadium.png" alt="Stadium" className="stadium-img" />
-        <div className="hotspot-overlay">
-            {[
-            { top: '66%', left: '48.5%', label: 'Name & Title' },
-            { top: '76.5%', left: '4.5%', label: 'Contact' },
-            { top: '72%', left: '12.8%', label: 'About Me' },
-            { top: '79%', left: '72%', label: 'Project 1' },
-            { top: '59.7%', left: '74.5%', label: 'Project 2' },
-            { top: '56.4%', left: '56%', label: 'Project 3' },
-            { top: '46%', left: '70%', label: 'GitHub' },
-            { top: '57.5%', left: '33%', label: 'LinkedIn' },
-            { top: '86%', left: '43.3%', label: 'Resume' },
-            ].map(({ top, left, label }, index) => (
-            <div
-                key={index}
-                className="player-container"
-                style={{ top, left, width: '8%', height: '12%' }}
-                onClick={() => handleClick(label)}
-            >
-                <div className="title-card">{label}</div>
-            </div>
-            ))}
-        </div>
-
-        <img ref={baseballRef} className="baseball-anim" alt="baseball" style={{ display: 'none' }} />
-        {modalContent && <Modal content={modalContent} onClose={closeModal} />}
-        </div>
-    );
+      {showRipple && <div className="ripple-screen" />}
+      {modalContent && <Modal content={modalContent} onClose={closeModal} />}
+    </div>
+  );
 }
